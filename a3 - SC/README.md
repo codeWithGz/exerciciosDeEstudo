@@ -102,15 +102,6 @@ echo "Backup realizado com sucesso em $destino_final"
 
 ---
 
-## 🧠 Sugestões de Melhoria Futuras
-
-- Adicionar logs em arquivo
-- Suporte a interface de menu em `dialog`/`whiptail`
-- Validação de IPs e caminhos mais robusta
-- Adicionar opção para restaurar backups
-
----
-
 ## 📜 Licença
 
 Este script é de uso livre para fins educacionais e administrativos. Não há garantia de estabilidade em ambientes de produção. Use com cautela.
