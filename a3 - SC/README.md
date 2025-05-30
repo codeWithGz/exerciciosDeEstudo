@@ -12,7 +12,7 @@ O usuário é apresentado a um menu com 11 opções, cada uma executando uma fun
 2) Cadastrar Um Novo Usuário          7) Exibir Detalhes de Arquivo
 3) Buscar Usuários com String         8) Exibir Total de Grupos Cadastrados
 4) Buscar Grupos com String           9) Gerenciar Organização (Usuários e Grupos)
-5) Verificar se IP está Ativo         10) Agendar Backup Semanal
+5) Verificar se IP está Ativo         10) Empacotar Usuario
                                        
 11) Sair do Programa
 ```
