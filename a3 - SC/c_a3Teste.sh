@@ -15,7 +15,7 @@ function Screen(){
 
 	echo -ne "4) Buscar Grupos com String        9)  Gerenciar Organizacao\n"
 
-	echo -ne "5) Verificar se IP esta Ativo      10) livre\n"
+	echo -ne "5) Verificar se IP esta Ativo      10) Empacotar Usuario\n"
 
 	echo -ne "\n11) Sair do Programa\n\n"
 
