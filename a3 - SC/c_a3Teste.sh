@@ -275,46 +275,30 @@ function manageOrg() {
 }
 
 #10
-function scheduleTask() {
-    clear
-    echo "=== Agendamento de Backup Semanal ==="
+function packUser() {
+    read -p "Digite o nome do usuário para empacotar: " usuario
 
-    # Solicita ao usuário os diretórios de origem e destino
-    read -p "Digite o caminho absoluto da pasta a ser copiada (origem): " origem
-    read -p "Digite o caminho absoluto da pasta onde o backup será salvo (destino): " destino
+    # Verifica se o usuário existe
+    if id "$usuario" &>/dev/null; then
+        # Descobre o diretório home do usuário
+        home_dir=$(eval echo "~$usuario")
 
-    # Valida os caminhos
-    if [[ ! -d "$origem" ]]; then
-        echo "Erro: Diretório de origem não existe."
-        read -p "Pressione ENTER para continuar..."
-        return
+        if [ ! -d "$home_dir" ]; then
+            echo "O diretório home de $usuario não foi encontrado."
+            return 1
+        fi
+
+        # Nome do backup com data/hora
+        data=$(date +%Y-%m-%d_%Hh%M)
+        nome_arquivo="${usuario}_backup_${data}.tar.gz"
+
+        echo "Empacotando '$home_dir'..."
+        tar -czf "$nome_arquivo" "$home_dir"
+
+        echo "Backup criado com sucesso: $nome_arquivo"
+    else
+        echo "Usuário '$usuario' não encontrado."
     fi
-
-    if [[ ! -d "$destino" ]]; then
-        echo "Destino não existe. Criando..."
-        mkdir -p "$destino"
-    fi
-
-    # Cria o script de backup
-    script_backup="$HOME/backup_semanal.sh"
-
-    echo "#!/bin/bash" > "$script_backup"
-    echo "timestamp=\$(date +\"%Y-%m-%d_%H-%M\")" >> "$script_backup"
-    echo "destino_final=\"$destino/backup_\$timestamp.tar.gz\"" >> "$script_backup"
-    echo "tar -czf \"\$destino_final\" -C \"$origem\" . " >> "$script_backup"
-    echo "echo \"Backup realizado com sucesso em \$destino_final\"" >> "$script_backup"
-
-    chmod +x "$script_backup"
-
-    # Define o agendamento: Segunda-feira (1), 21:45
-    agendamento="45 21 * * 1 $script_backup"
-
-    # Adiciona ao crontab
-    (crontab -l 2>/dev/null; echo "$agendamento") | crontab -
-
-    echo -e "\nBackup agendado com sucesso!"
-    echo "O backup da pasta '$origem' será salvo em '$destino' toda segunda-feira às 21:45."
-    echo "Script criado: $script_backup"
 
     read -p "Pressione ENTER para continuar..."
 }
@@ -333,8 +317,8 @@ while true; do
         7) fileInfo ;;
         8) showGroups ;;
         9) manageOrg ;;
-        10) scheduleTask ;;
-        11) echo "Saindo..." ; exit 0 ;;
+        10) packUser ;;
+        11) echo "Que Dias Promissores Estejam Por Recomeçar... Até a Proxima!! " ; exit 0 ;;
         *) echo "Opcao invalida. Por favor, digite um numero de 1 a 11." ; read -p "Pressione ENTER para continuar..." ;;
     esac
 
