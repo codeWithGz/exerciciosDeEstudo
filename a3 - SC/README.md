@@ -51,12 +51,12 @@ Permite consultar, alterar ou remover:
 - Usuários (via `usermod`, `userdel`)
 - Grupos (via `groupmod`, `groupdel`)
 
-### 10. `scheduleTask` – Agendamento de Backup
-Agenda um **backup automático semanal** com `crontab`:
-- Solicita diretórios de origem e destino.
-- Cria um script `backup_semanal.sh` no diretório pessoal do usuário.
-- O backup é realizado **toda segunda-feira às 21:45**.
-- Gera um arquivo `.tar.gz` com timestamp no nome.
+### 10. `packUser` – Empacotamento de Usuario
+Realiza um **backup imediato do diretório** de um usuário específico com `tar`:
+- Solicita o nome de usuário.
+- Verifica se o usuário existe no sistema.
+- O backup é salvo no diretório /tmp, com timestamp no nome para fácil identificação.
+- Útil para exportar dados de usuários ou preservar suas informações antes de alterações no sistema.
 
 ### 11. Sair
 Encerra o script.
